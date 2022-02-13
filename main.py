@@ -72,13 +72,16 @@ def get_pill_time(start: str, pill_interval_type: str, pill_interval_value: int,
             'next': next_five[:5]
         }
 
-    # return res
-    print(res)
+    return res
+    # print(res)
 
 
 if __name__ == '__main__':
-    a = '2022-02-13T22:30:00'
-    b = 'h'
-    c = 1  # hours
-    d = 50  # minutes
-    get_pill_time(a, b, c, d)
+    start = '2022-02-12T01:30:00'
+    # pill_interval_type can be d for day, h for hour and m for minutes
+    # threshold type is one level smaller than pill_interval_type for example if pill_interval_type is m (minute) then
+    # threshold type is seconds
+    pill_interval_type = 'm'
+    pill_interval_value = 5
+    threshold = 30
+    get_pill_time(start, pill_interval_type, pill_interval_value, threshold)
