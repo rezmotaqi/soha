@@ -1,6 +1,6 @@
 import datetime
 from dateutil.parser import parse
-from sqllite import insert_done, check_done
+from sqllite import insert_done, check_done, create_table
 
 
 # gets starting time of taking pills, type of given interval for taking a pill (hour, min, sec), \
@@ -20,7 +20,7 @@ def get_pill_time(start: str, pill_interval_type: str, pill_interval_value: int,
     start_now_diff = now_stamp - start_stamp
 
     # passed_intervals ==> number of passed intervals since the start
-
+    create_table()
     if pill_interval_type == 'd':
         passed_intervals = (start_now_diff // (pill_interval_value * 24 * 60 * 60))
         last_take = start_datetime + datetime.timedelta(days=passed_intervals * pill_interval_value)
@@ -72,8 +72,9 @@ def get_pill_time(start: str, pill_interval_type: str, pill_interval_value: int,
             'next': next_five[:5]
         }
 
+    print(res)
+
     return res
-    # print(res)
 
 
 if __name__ == '__main__':
@@ -83,5 +84,5 @@ if __name__ == '__main__':
     # threshold type is seconds
     pill_interval_type = 'm'
     pill_interval_value = 5
-    threshold = 30
+    threshold = 600
     get_pill_time(start, pill_interval_type, pill_interval_value, threshold)
